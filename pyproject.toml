@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "cicd-python"
+version = "0.1.0"
+description = ""
+license = "GNU GENERAL PUBLIC LICENSE v3"
+authors = ["sjchin88"]
+readme = "README.md"
+packages = [{include = "cli", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+click = "^8.1.7"
+
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.3.1"
+pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
+
+[tool.pytest.ini_options]
+addopts = "--cov=src --cov-report html --cov-fail-under=50"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+cid = "cli.__main__:cli"
