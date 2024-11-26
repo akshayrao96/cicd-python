@@ -5,7 +5,7 @@ description = ""
 license = "GNU GENERAL PUBLIC LICENSE v3"
 authors = ["sjchin88"]
 readme = "README.md"
-packages = [{include = "cli", from = "src"}]
+packages = [{include = "clitool", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -25,4 +25,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-cid = "cli.__main__:cli"
+cicd = "clitool.__main__:cli"
