@@ -6,7 +6,7 @@ global:
   docker:
     registry: "dockerhub"
     image: "sjchin88/python-git-poetry:latest"
-  artifact_upload_path: "cicd-python-docs"
+  artifact_upload_path: "cs6510-python"
 
 # default stages: [build, test, doc, deploy]
 stages: ["build", "test"]
