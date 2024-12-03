@@ -2,44 +2,42 @@
 # repo is set and cli does not specify repo and yml file by default
 # Pipeline name changed to avoid duplication names
 global:
-    pipeline_name: "cicd_pipeline3"
-    docker: 
-        registry: 'dockerhub'
-        image: "sjchin88/python-git-poetry:latest"
-    artifact_upload_path: "t4-cicd-cs6510"
+  pipeline_name: "cicd_pipeline3"
+  docker:
+    registry: "dockerhub"
+    image: "sjchin88/python-git-poetry:latest"
+  artifact_upload_path: "cicd-python-docs"
 
 # default stages: [build, test, doc, deploy]
-stages: ['build', 'test']
+stages: ["build", "test"]
 
 jobs:
-    # Job for build stage
-    checkout:
-        stage: build
-        scripts: ['git clone https://github.com/sjchin88/cicd-python .']
+  # Job for build stage
+  checkout:
+    stage: build
+    scripts: ["git clone https://github.com/akshayrao96/cicd-python ."]
 
-    compile:
-        stage: build
-        allow_failure: False
-        needs: ['checkout']
-        scripts: 
-            - 'poetry config virtualenvs.path /app/.cache/pypoetry/virtualenvs'
-            - 'poetry install'
+  compile:
+    stage: build
+    allow_failure: False
+    needs: ["checkout"]
+    scripts:
+      - "poetry config virtualenvs.path /app/.cache/pypoetry/virtualenvs"
+      - "poetry install"
 
-    # Job for test stage
-    pytest:
-        stage: test
-        scripts: 
-            - 'poetry config virtualenvs.path /app/.cache/pypoetry/virtualenvs'
-            - 'poetry run pytest'
-        artifacts:
-            on_success_only: False
-            paths: 
-                - 'htmlcov'
-    
-    pylint:
-        stage: test
-        scripts: 
-            - 'poetry config virtualenvs.path /app/.cache/pypoetry/virtualenvs'
-            - 'poetry run pylint ./src --fail-under=9.5'
+  # Job for test stage
+  pytest:
+    stage: test
+    scripts:
+      - "poetry config virtualenvs.path /app/.cache/pypoetry/virtualenvs"
+      - "poetry run pytest"
+    artifacts:
+      on_success_only: False
+      paths:
+        - "htmlcov"
 
-    
+  pylint:
+    stage: test
+    scripts:
+      - "poetry config virtualenvs.path /app/.cache/pypoetry/virtualenvs"
+      - "poetry run pylint ./src --fail-under=9.5"
